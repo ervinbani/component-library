@@ -29,7 +29,8 @@ function App() {
     name: "Wireless Headphones",
     price: 199.99,
     description: "High-quality wireless headphones with noise cancellation.",
-    imageUrl: "https://via.placeholder.com/400x300",
+    imageUrl:
+      "https://www.acpdirect.com/Assets/ProductImages/headphones/EDU700/EDU700-1_gs.jpg",
     inStock: true,
   };
 
