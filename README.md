@@ -233,10 +233,38 @@ import type { User, Product } from "./types/index";
 - `npm run preview`: Preview production build
 - `npm run lint`: Run ESLint
 
-## Author
+## Reflection Questions
 
-Ervin Bani
+### How did you handle optional props in your components?
 
-## License
+Optional props were handled using TypeScript's optional operator (`?`) in interfaces and default parameters in component destructuring. For example, `showEmail?: boolean` allows the prop to be omitted, with default values set to `true` or `false` as needed. This provides flexibility while maintaining type safety.
 
-MIT
+### What considerations did you make when designing the component interfaces?
+
+Component interfaces were designed with reusability and flexibility in mind. Each component accepts:
+
+- Required props for core functionality (e.g., `user`, `product`, `type`, `message`)
+- Optional props for customization (e.g., `showEmail`, `showDescription`)
+- Optional callback handlers for interactions (e.g., `onEdit`, `onAddToCart`, `onClose`)
+- Children support for extensibility
+
+This approach ensures components can be used in various contexts while maintaining a clean API.
+
+### How did you ensure type safety across your components?
+
+Type safety was ensured by:
+
+- Defining TypeScript interfaces for all props in a centralized `types/index.ts` file
+- Using union types for restricted values (e.g., `AlertType = 'success' | 'error' | 'warning' | 'info'`)
+- Importing types with `type` keyword when using `verbatimModuleSyntax`
+- Leveraging TypeScript's type inference for state management
+- Properly typing callback functions with parameter and return types
+
+### What challenges did you face when implementing component composition?
+
+The main challenge was ensuring that children components render correctly in different contexts while maintaining proper styling and layout. This was solved by:
+
+- Creating dedicated container divs for children with appropriate Tailwind classes
+- Using conditional rendering to only show children when provided
+- Ensuring children don't break the parent component's layout
+- Testing components with and without children to verify behavior
