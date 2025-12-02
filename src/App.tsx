@@ -21,7 +21,7 @@ function App() {
     name: "John Doe",
     email: "john.doe@example.com",
     role: "Software Engineer",
-    avatarUrl: "https://via.placeholder.com/150",
+    avatarUrl: "https://www.w3schools.com/howto/img_avatar.png",
   };
 
   const product: Product = {
