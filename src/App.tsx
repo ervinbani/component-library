@@ -1,10 +1,34 @@
 import { useState } from "react";
 import "./App.css";
+import { UserProfileCard } from "./components/UserProfileCard/UserProfileCard";
+import { ProductDisplay } from "./components/ProductDisplay/ProductDisplay";
+import { AlertBox } from "./components/AlertBox/AlertBox";
+import type { User, Product } from "./types/index";
 
 type View = "home" | "user" | "product";
 
 function App() {
   const [currentView, setCurrentView] = useState<View>("home");
+  const [showUserAlert, setShowUserAlert] = useState(false);
+  const [showProductAlert, setShowProductAlert] = useState(false);
+
+  // Sample data
+  const user: User = {
+    id: "1",
+    name: "John Doe",
+    email: "john.doe@example.com",
+    role: "Software Engineer",
+    avatarUrl: "https://via.placeholder.com/150",
+  };
+
+  const product: Product = {
+    id: "1",
+    name: "Wireless Headphones",
+    price: 199.99,
+    description: "High-quality wireless headphones with noise cancellation.",
+    imageUrl: "https://via.placeholder.com/400x300",
+    inStock: true,
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
@@ -69,21 +93,71 @@ function App() {
 
           {currentView === "user" && (
             <div>
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-6">
                 User Profile Component
               </h2>
-              {/* User component will be added in next step */}
-              <p className="text-gray-500">User component coming soon...</p>
+
+              {showUserAlert && (
+                <div className="mb-6">
+                  <AlertBox
+                    type="success"
+                    message="User profile updated successfully!"
+                    onClose={() => setShowUserAlert(false)}
+                  >
+                    <p className="text-sm mt-2">All changes have been saved.</p>
+                  </AlertBox>
+                </div>
+              )}
+
+              <UserProfileCard
+                user={user}
+                showEmail={true}
+                showRole={true}
+                onEdit={(userId) => {
+                  setShowUserAlert(true);
+                  alert(`Editing user ${userId}`);
+                }}
+              >
+                <div className="text-sm text-gray-500">
+                  Last login: 2 hours ago
+                </div>
+              </UserProfileCard>
             </div>
           )}
 
           {currentView === "product" && (
             <div>
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-6">
                 Product Display Component
               </h2>
-              {/* Product component will be added in next step */}
-              <p className="text-gray-500">Product component coming soon...</p>
+
+              {showProductAlert && (
+                <div className="mb-6">
+                  <AlertBox
+                    type="success"
+                    message="Product added to cart successfully!"
+                    onClose={() => setShowProductAlert(false)}
+                  >
+                    <p className="text-sm mt-2">
+                      Continue shopping or proceed to checkout.
+                    </p>
+                  </AlertBox>
+                </div>
+              )}
+
+              <ProductDisplay
+                product={product}
+                showDescription={true}
+                showStockStatus={true}
+                onAddToCart={(productId) => {
+                  setShowProductAlert(true);
+                  alert(`Added product ${productId} to cart`);
+                }}
+              >
+                <div className="text-sm text-gray-500">
+                  Free shipping available
+                </div>
+              </ProductDisplay>
             </div>
           )}
         </main>
