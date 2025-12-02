@@ -1,6 +1,6 @@
 // components/ProductDisplay/ProductDisplay.tsx
 import React from "react";
-import type { ProductDisplayProps } from "../../types/index";
+import type { ProductDisplayProps } from "../../types/ProductDisplay.types";
 
 export const ProductDisplay: React.FC<ProductDisplayProps> = ({
   product,
