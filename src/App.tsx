@@ -3,14 +3,17 @@ import "./App.css";
 import { UserProfileCard } from "./components/UserProfileCard/UserProfileCard";
 import { ProductDisplay } from "./components/ProductDisplay/ProductDisplay";
 import { AlertBox } from "./components/AlertBox/AlertBox";
-import type { User, Product } from "./types/index";
+import type { User, Product, AlertType } from "./types/index";
 
 type View = "home" | "user" | "product";
 
 function App() {
   const [currentView, setCurrentView] = useState<View>("home");
   const [showUserAlert, setShowUserAlert] = useState(false);
+  const [userAlertType, setUserAlertType] = useState<AlertType>("success");
   const [showProductAlert, setShowProductAlert] = useState(false);
+  const [productAlertType, setProductAlertType] =
+    useState<AlertType>("success");
 
   // Sample data
   const user: User = {
@@ -96,15 +99,22 @@ function App() {
               <h2 className="text-2xl font-semibold text-gray-800 mb-6">
                 User Profile Component
               </h2>
-
               {showUserAlert && (
                 <div className="mb-6">
                   <AlertBox
-                    type="success"
-                    message="User profile updated successfully!"
+                    type={userAlertType}
+                    message={
+                      userAlertType === "success"
+                        ? "User profile updated successfully!"
+                        : "User profile update cancelled."
+                    }
                     onClose={() => setShowUserAlert(false)}
                   >
-                    <p className="text-sm mt-2">All changes have been saved.</p>
+                    <p className="text-sm mt-2">
+                      {userAlertType === "success"
+                        ? "All changes have been saved."
+                        : "No changes were made to the profile."}
+                    </p>
                   </AlertBox>
                 </div>
               )}
@@ -114,8 +124,16 @@ function App() {
                 showEmail={true}
                 showRole={true}
                 onEdit={(userId) => {
-                  setShowUserAlert(true);
-                  alert(`Editing user ${userId}`);
+                  const confirmed = confirm(
+                    `Do you want to edit user ${userId}?`
+                  );
+                  if (confirmed) {
+                    setUserAlertType("success");
+                    setShowUserAlert(true);
+                  } else {
+                    setUserAlertType("error");
+                    setShowUserAlert(true);
+                  }
                 }}
               >
                 <div className="text-sm text-gray-500">
@@ -134,12 +152,18 @@ function App() {
               {showProductAlert && (
                 <div className="mb-6">
                   <AlertBox
-                    type="success"
-                    message="Product added to cart successfully!"
+                    type={productAlertType}
+                    message={
+                      productAlertType === "success"
+                        ? "Product added to cart successfully!"
+                        : "Product not added to cart."
+                    }
                     onClose={() => setShowProductAlert(false)}
                   >
                     <p className="text-sm mt-2">
-                      Continue shopping or proceed to checkout.
+                      {productAlertType === "success"
+                        ? "Continue shopping or proceed to checkout."
+                        : "You cancelled adding the product to cart."}
                     </p>
                   </AlertBox>
                 </div>
@@ -150,8 +174,16 @@ function App() {
                 showDescription={true}
                 showStockStatus={true}
                 onAddToCart={(productId) => {
-                  setShowProductAlert(true);
-                  alert(`Added product ${productId} to cart`);
+                  const confirmed = confirm(
+                    `Do you want to add "${product.name}" to your cart?`
+                  );
+                  if (confirmed) {
+                    setProductAlertType("success");
+                    setShowProductAlert(true);
+                  } else {
+                    setProductAlertType("error");
+                    setShowProductAlert(true);
+                  }
                 }}
               >
                 <div className="text-sm text-gray-500">

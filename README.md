@@ -5,6 +5,7 @@ A reusable React TypeScript component library showcasing best practices for comp
 ## Project Overview
 
 This project demonstrates the creation of three reusable UI components:
+
 - **AlertBox**: A customizable alert component for displaying messages
 - **UserProfileCard**: A user profile display component with editable fields
 - **ProductDisplay**: A product showcase component with cart functionality
@@ -16,22 +17,25 @@ This project demonstrates the creation of three reusable UI components:
 ✅ Proper prop handling with optional parameters  
 ✅ Component composition with children support  
 ✅ Interactive demo application  
-✅ Tailwind CSS styling  
+✅ Tailwind CSS styling
 
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/ervinbani/component-library.git
 cd component-library
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -65,12 +69,14 @@ src/
 Displays different types of alerts with customizable messages.
 
 **Props:**
+
 - `type`: `'success' | 'error' | 'warning' | 'info'` - Alert type
 - `message`: `string` - Alert message to display
 - `onClose?`: `() => void` - Optional close handler
 - `children?`: `React.ReactNode` - Optional additional content
 
 **Example:**
+
 ```tsx
 <AlertBox
   type="success"
@@ -86,6 +92,7 @@ Displays different types of alerts with customizable messages.
 Displays user profile information with optional edit functionality.
 
 **Props:**
+
 - `user`: `User` - User object containing id, name, email, role, avatarUrl
 - `showEmail?`: `boolean` - Show/hide email (default: true)
 - `showRole?`: `boolean` - Show/hide role (default: true)
@@ -93,6 +100,7 @@ Displays user profile information with optional edit functionality.
 - `children?`: `React.ReactNode` - Optional additional content
 
 **Example:**
+
 ```tsx
 <UserProfileCard
   user={user}
@@ -100,9 +108,7 @@ Displays user profile information with optional edit functionality.
   showRole={true}
   onEdit={(userId) => handleEdit(userId)}
 >
-  <div className="text-sm text-gray-500">
-    Last login: 2 hours ago
-  </div>
+  <div className="text-sm text-gray-500">Last login: 2 hours ago</div>
 </UserProfileCard>
 ```
 
@@ -111,6 +117,7 @@ Displays user profile information with optional edit functionality.
 Displays product information with add-to-cart functionality.
 
 **Props:**
+
 - `product`: `Product` - Product object with id, name, price, description, imageUrl, inStock
 - `showDescription?`: `boolean` - Show/hide description (default: true)
 - `showStockStatus?`: `boolean` - Show/hide stock status (default: true)
@@ -118,6 +125,7 @@ Displays product information with add-to-cart functionality.
 - `children?`: `React.ReactNode` - Optional additional content
 
 **Example:**
+
 ```tsx
 <ProductDisplay
   product={product}
@@ -125,9 +133,7 @@ Displays product information with add-to-cart functionality.
   showStockStatus={true}
   onAddToCart={(productId) => handleAddToCart(productId)}
 >
-  <div className="text-sm text-gray-500">
-    Free shipping available
-  </div>
+  <div className="text-sm text-gray-500">Free shipping available</div>
 </ProductDisplay>
 ```
 
@@ -137,7 +143,7 @@ All type definitions are located in `src/types/index.ts`:
 
 ```typescript
 // Alert types
-export type AlertType = 'success' | 'error' | 'warning' | 'info';
+export type AlertType = "success" | "error" | "warning" | "info";
 
 export interface AlertBoxProps {
   type: AlertType;
@@ -197,10 +203,10 @@ The application includes a navigation menu to explore each component:
 Import the components and types:
 
 ```tsx
-import { AlertBox } from './components/AlertBox/AlertBox';
-import { UserProfileCard } from './components/UserProfileCard/UserProfileCard';
-import { ProductDisplay } from './components/ProductDisplay/ProductDisplay';
-import type { User, Product } from './types/index';
+import { AlertBox } from "./components/AlertBox/AlertBox";
+import { UserProfileCard } from "./components/UserProfileCard/UserProfileCard";
+import { ProductDisplay } from "./components/ProductDisplay/ProductDisplay";
+import type { User, Product } from "./types/index";
 ```
 
 ## Key Features Demonstrated
